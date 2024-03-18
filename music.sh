@@ -56,6 +56,6 @@ if [[ $youtube_url == *"list"* ]]; then
     fi
 else
     # If the URL does not contain "list", execute command B
-    echo "URL does not contain 'list'. Executing command B..."
+    yt-dlp --extract-audio --audio-format mp3 --audio-quality 0 "$youtube_url"
     # Place your command B here
 fi
