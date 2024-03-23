@@ -1,4 +1,7 @@
 #!/bin/bash
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
 echo "
  /\_/\  
 ( o.o ) 
@@ -16,12 +19,20 @@ printf "%s\n" "$(printf "%${line_length}s" "$line_character" | tr ' ' "$line_cha
 # Printing the welcome message for the user
 echo "Welcome User"
 echo "This tool will make your life easier and help you to automate the downloading from different platforms.\n"
-
+read -p "Download through file(F) or single link(L)  F/L :"  response_file_or_link
+response_file_or_link=$(echo "$response_file_or_link" | tr '[:lower:]' '[:upper:]')
+if [ "$response_file_or_link" == "F" ]; then
+    count=1
+    while read -r music_link; do
+        echo -e "${RED}Music $count Downloading"
+        yt-dlp --extract-audio --audio-format mp3 --audio-quality 0 "$music_link"
+        count=$((count+1))
+    done < music.txt
+elif [[ "$response_file_or_link" == "L" ]]; then
 # Prompt the user to enter the YouTube URL
-read -p "Please enter the YouTube URL: " youtube_url
-
+  read -p "Please enter the YouTube URL: " youtube_url
 # Check if the URL contains "list"
-if [[ $youtube_url == *"list"* ]]; then
+  if [[ $youtube_url == *"list"* ]]; then
     # if url contain list ask user for other things
     echo "Your link is of a playlist!"
     echo "Do you want to continue downloading the whole playlist? (Y/N)"
@@ -58,4 +69,5 @@ else
     # If the URL does not contain "list", execute command B
     yt-dlp --extract-audio --audio-format mp3 --audio-quality 0 "$youtube_url"
     # Place your command B here
+fi
 fi

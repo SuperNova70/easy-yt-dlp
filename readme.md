@@ -2,6 +2,8 @@
 This is a simple project i made for automating downloading song etc from different sources:
   It based on [yt-dlp](https://github.com/yt-dlp/yt-dlp)
 
+# Added file support
+      - Just put your all link in music.txt line by line and excute the music.sh and follow the simple instruction
 # Installation
   1. **Linux**
         - First download the yt-dlp 
